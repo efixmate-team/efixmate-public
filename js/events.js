@@ -2,7 +2,7 @@ import { $, toast } from './utils.js';
 import { openSheet, closeSheet } from './sheet.js';
 import { bump, bumpById, getLine, openCart, closeCart, confirmBooking, resetCart, selectDate, selectSlot } from './cart.js';
 import { openSearch, closeSearch } from './search.js';
-import { filterHome } from './render.js';
+import { filterHome, filterByCategory } from './render.js';
 
 document.addEventListener('click', e=>{
   const t = e.target;
@@ -20,7 +20,7 @@ document.addEventListener('click', e=>{
   const d=t.closest('[data-date]'); if(d){ selectDate(d.dataset.date); return; }
   const s=t.closest('[data-slot]'); if(s && !s.disabled){ selectSlot(s.dataset.slot); return; }
   if(t.closest('[data-searchopen]')) return openSearch('');
-  const cat=t.closest('[data-cat]'); if(cat) return openSearch(cat.dataset.cat);
+  const cat=t.closest('[data-cat]'); if(cat) return filterByCategory(cat.dataset.cat);
   const see=t.closest('[data-see]'); if(see) return openSearch(see.dataset.see);
 
   if(t.closest('#openCart')||t.closest('#cartBar')) return openCart();

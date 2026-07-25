@@ -44,13 +44,28 @@ function defaultRailsHTML(){
     <button class="efm-see" data-see="${t.split('—')[0].trim()}">see all <svg class="efm-ic" style="width:11px;height:11px;vertical-align:-1px"><use href="#chev-r"/></svg></button></div>
     <div class="efm-rail">${ids.map(cardHTML).join('')}</div></section>`).join('');
 }
+function filteredSectionHTML(title, ids){
+  return `<section class="efm-sec">
+    <div class="efm-sec-head"><div><h2>${title}</h2><p>${ids.length} service${ids.length!==1?'s':''}</p></div></div>
+    <div class="efm-grid">${ids.map(cardHTML).join('')}</div></section>`;
+}
 
 export function filterHome(label){
   if(!label || label==='All'){ $('#rails').innerHTML = defaultRailsHTML(); syncCards(); return; }
   const ids = label==='Offers' ? S.filter(s=>off(s[3],s[4])>=35).map(s=>s[0]) : (NAV_IDS[label]||[]);
-  $('#rails').innerHTML = `<section class="efm-sec">
-    <div class="efm-sec-head"><div><h2>${label}</h2><p>${ids.length} service${ids.length!==1?'s':''}</p></div></div>
-    <div class="efm-grid">${ids.map(cardHTML).join('')}</div></section>`;
+  $('#rails').innerHTML = filteredSectionHTML(label, ids);
+  syncCards();
+}
+
+/* category tiles: each maps to its own curated set of service ids */
+const CAT_IDS = {
+  Electrical: ['el1'], Plumbing: ['pl1'], 'AC repair': ['ac1'], Cleaning: ['cl1','cl4'],
+  Painting: ['ot1'], Carpentry: ['ho1'], Appliances: ['ap1'], 'Pest control': ['ho4'],
+  'RO service': ['ap3'], CCTV: ['ho2'], 'Water tank': ['ho3'], 'Deep clean': ['cl3'],
+  Salon: ['sa1','sa3'], Beauty: ['sa2'], Laundry: ['ot2'], Movers: ['ot3'],
+};
+export function filterByCategory(label){
+  $('#rails').innerHTML = filteredSectionHTML(label, CAT_IDS[label] || []);
   syncCards();
 }
 
