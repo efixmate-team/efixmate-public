@@ -107,11 +107,27 @@ export function openLogin(){
 }
 export function closeLogin(){
   $('#loginSheet').classList.remove('efm-on');
-  if(!$('#cart').classList.contains('efm-on') && !$('#sheet').classList.contains('efm-on')) $('#scrim').classList.remove('efm-on');
+  releaseScrimIfClear();
   document.body.style.overflow='';
   clearInterval(resendTimer);
 }
 export function isLoginOpen(){ return $('#loginSheet').classList.contains('efm-on'); }
+
+export function openLogoutConfirm(){
+  closeUserDrop();
+  $('#logoutConfirm').classList.add('efm-on'); $('#scrim').classList.add('efm-on'); document.body.style.overflow='hidden';
+}
+export function closeLogoutConfirm(){
+  $('#logoutConfirm').classList.remove('efm-on');
+  releaseScrimIfClear();
+  document.body.style.overflow='';
+}
+export function isLogoutConfirmOpen(){ return $('#logoutConfirm').classList.contains('efm-on'); }
+
+function releaseScrimIfClear(){
+  if(!$('#cart').classList.contains('efm-on') && !$('#sheet').classList.contains('efm-on') && !isLoginOpen() && !isLogoutConfirmOpen())
+    $('#scrim').classList.remove('efm-on');
+}
 
 function wireAvatar(img, user, name){
   if(!img) return;
@@ -147,8 +163,7 @@ export function paintAuthUI(){
     : `<span class="efm-avatar efm-avatar-fallback">${name.charAt(0).toUpperCase()}</span>`;
 
   btn.classList.add('efm-logged-in');
-  btn.innerHTML = `${avatarHTML}My Account`;
-  wireAvatar(btn.querySelector('img.efm-avatar'), user, name);
+  btn.textContent = 'My Account';
 
   const head = $('#userDropHead');
   head.innerHTML = `${avatarHTML}<span class="efm-user-info"><b>${name}</b>${phoneLabel ? `<small>${phoneLabel}</small>` : ''}</span>`;
@@ -162,7 +177,10 @@ $('#loginResend').onclick = ()=>{ if(!$('#loginResend').disabled) sendOtp(); };
 $('#loginSubmit').onclick = ()=> step==='phone' ? sendOtp() : verifyOtp();
 $('#loginPhone').addEventListener('keydown', e=>{ if(e.key==='Enter') sendOtp(); });
 $('#loginOtp').addEventListener('keydown', e=>{ if(e.key==='Enter') verifyOtp(); });
-$('#logoutBtn').onclick = logout;
+$('#logoutBtn').onclick = openLogoutConfirm;
+$('#logoutClose').onclick = closeLogoutConfirm;
+$('#logoutCancel').onclick = closeLogoutConfirm;
+$('#logoutConfirmBtn').onclick = ()=>{ closeLogoutConfirm(); logout(); };
 document.addEventListener('click', e=>{ if(!e.target.closest('#userMenu')) closeUserDrop(); });
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeUserDrop(); });
 
