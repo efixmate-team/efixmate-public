@@ -61,6 +61,33 @@ header{position:sticky; top:0; z-index:40; background:var(--bg); border-bottom:1
 .efm-h-nav button{font-size:12.5px; font-weight:600; color:var(--gray); white-space:nowrap; height:100%; border-bottom:2px solid transparent}
 .efm-h-nav button.efm-on{color:var(--ink); border-bottom-color:var(--blue)}
 
+/* ---------- hero carousel ---------- */
+.efm-hero{position:relative; margin-top:16px; border-radius:var(--r-lg); overflow:hidden}
+.efm-hero-track{display:flex; transition:transform .5s cubic-bezier(.3,.8,.3,1)}
+.efm-hero-slide{flex:0 0 100%; min-height:220px; display:flex; align-items:center; justify-content:space-between; gap:20px; padding:28px 32px}
+.efm-hero-text{max-width:440px}
+.efm-hero-tag{display:inline-block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--blue); background:rgba(37,99,235,.1); padding:4px 10px; border-radius:20px; margin-bottom:10px}
+.efm-hero-text h2{margin:0 0 6px; font-size:clamp(19px,3vw,27px); font-weight:800; letter-spacing:-.02em; line-height:1.22; color:var(--ink)}
+.efm-hero-text p{margin:0 0 16px; font-size:13.5px; color:var(--ink-2)}
+.efm-hero-cta{display:inline-flex; align-items:center; gap:8px; background:var(--blue); color:#fff; border-radius:var(--r); padding:11px 18px; font-weight:700; font-size:13.5px}
+.efm-hero-cta:hover{background:var(--blue-d)}
+.efm-hero-cta .efm-ic{width:15px; height:15px}
+.efm-hero-img{height:170px; width:auto; max-width:38%; object-fit:contain; flex:none}
+.efm-hero-arrow{position:absolute; top:50%; transform:translateY(-50%); width:34px; height:34px; border-radius:50%; background:var(--bg); border:1px solid var(--line-2); display:grid; place-items:center; color:var(--ink-2); box-shadow:0 4px 14px rgba(0,0,0,.1)}
+.efm-hero-arrow:hover{color:var(--blue); border-color:var(--blue)}
+.efm-hero-prev{left:12px}
+.efm-hero-next{right:12px}
+.efm-hero-arrow .efm-ic{width:16px; height:16px}
+.efm-hero-dots{position:absolute; left:0; right:0; bottom:12px; display:flex; justify-content:center; gap:6px}
+.efm-hero-dot{width:6px; height:6px; border-radius:50%; background:rgba(0,0,0,.2)}
+.efm-hero-dot.efm-on{width:18px; background:var(--blue)}
+@media (max-width:640px){
+  .efm-hero-slide{padding:20px; min-height:180px}
+  .efm-hero-img{height:110px}
+  .efm-hero-arrow{display:none}
+  .efm-hero-text h2{font-size:18px}
+}
+
 /* ---------- tiles / banners ---------- */
 .efm-strip{padding:34px 0 34px}
 .efm-tiles{display:grid; grid-auto-flow:column; grid-template-rows:1fr 1fr; gap:10px; overflow-x:auto; scroll-snap-type:x proximity; padding-bottom:12px; scrollbar-width:none}
