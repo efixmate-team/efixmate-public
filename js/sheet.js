@@ -11,21 +11,21 @@ export function openSheet(id, editKey){
   const editLine = editKey ? getLine(editKey) : null;
   if(editLine){ sh.t=editLine.t; sh.u=editLine.u; sh.q=editLine.q; }
   $('#shThumb').style.background = P[c];
-  $('#shThumb').innerHTML = `<svg class="ic" style="color:${C[c]}"><use href="#${ic}"/></svg>`;
+  $('#shThumb').innerHTML = `<svg class="efm-ic" style="color:${C[c]}"><use href="#${ic}"/></svg>`;
   $('#shName').textContent = n;
   $('#shMeta').textContent = `${m} · ${eta.toLowerCase()} · ★ ${r}`;
   const f = fam(id);
-  $('#shTypes').innerHTML = f.types.map(t=>`<button class="opt ${sh.t===t[0]?'on':''}" data-t="${t[0]}">${t[1]}</button>`).join('');
-  $('#shUnits').innerHTML = f.units.map(u=>`<button class="opt ${sh.u===u[0]?'on':''}" data-u="${u[0]}">${u[1]}<small>per ${u[2]}</small></button>`).join('');
+  $('#shTypes').innerHTML = f.types.map(t=>`<button class="efm-opt ${sh.t===t[0]?'efm-on':''}" data-t="${t[0]}">${t[1]}</button>`).join('');
+  $('#shUnits').innerHTML = f.units.map(u=>`<button class="efm-opt ${sh.u===u[0]?'efm-on':''}" data-u="${u[0]}">${u[1]}<small>per ${u[2]}</small></button>`).join('');
   paintSheet();
-  $('#sheet').classList.add('on'); $('#scrim').classList.add('on'); document.body.style.overflow='hidden';
+  $('#sheet').classList.add('efm-on'); $('#scrim').classList.add('efm-on'); document.body.style.overflow='hidden';
 }
-export function closeSheet(){ $('#sheet').classList.remove('on');
-  if(!$('#cart').classList.contains('on')){ $('#scrim').classList.remove('on');
-    if(!$('#searchPage').classList.contains('on')) document.body.style.overflow=''; } }
+export function closeSheet(){ $('#sheet').classList.remove('efm-on');
+  if(!$('#cart').classList.contains('efm-on')){ $('#scrim').classList.remove('efm-on');
+    if(!$('#searchPage').classList.contains('efm-on')) document.body.style.overflow=''; } }
 function paintSheet(){
   const ready = sh.t && sh.u;
-  $('#shQtyRow').classList.toggle('off', !ready);
+  $('#shQtyRow').classList.toggle('efm-off', !ready);
   $('#shAdd').disabled = !ready;
   if(!ready){
     $('#shUnitPrice').textContent = '—';
@@ -45,9 +45,9 @@ function paintSheet(){
   $('#shCtaR').innerHTML = `${rupee(p*sh.q)}<s>${rupee(mrpEach*sh.q)}</s>`;
 }
 $('#shTypes').addEventListener('click', e=>{ const b=e.target.closest('[data-t]'); if(!b) return;
-  sh.t=b.dataset.t; [...$('#shTypes').children].forEach(x=>x.classList.toggle('on', x===b)); paintSheet(); });
+  sh.t=b.dataset.t; [...$('#shTypes').children].forEach(x=>x.classList.toggle('efm-on', x===b)); paintSheet(); });
 $('#shUnits').addEventListener('click', e=>{ const b=e.target.closest('[data-u]'); if(!b) return;
-  sh.u=b.dataset.u; sh.q = unitOf(sh.id,sh.u)[4]; [...$('#shUnits').children].forEach(x=>x.classList.toggle('on', x===b)); paintSheet(); });
+  sh.u=b.dataset.u; sh.q = unitOf(sh.id,sh.u)[4]; [...$('#shUnits').children].forEach(x=>x.classList.toggle('efm-on', x===b)); paintSheet(); });
 $('#qInc').onclick = ()=>{ sh.q += unitOf(sh.id,sh.u)[4]; paintSheet(); };
 $('#qDec').onclick = ()=>{ const st=unitOf(sh.id,sh.u)[4]; sh.q = Math.max(st, sh.q-st); paintSheet(); };
 $('#shClose').onclick = closeSheet;

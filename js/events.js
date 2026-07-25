@@ -24,20 +24,20 @@ document.addEventListener('click', e=>{
 
   if(t.closest('#openCart')||t.closest('#cartBar')) return openCart();
   if(t.closest('#closeCart')) return closeCart();
-  if(t.closest('#scrim')){ if($('#sheet').classList.contains('on')) return closeSheet(); return closeCart(); }
+  if(t.closest('#scrim')){ if($('#sheet').classList.contains('efm-on')) return closeSheet(); return closeCart(); }
   if(t.closest('#confirm')) return confirmBooking();
   if(t.closest('#doneBtn')) return resetCart();
   if(t.closest('#shopBtn')) return closeCart();
   if(t.closest('#etaBox')) return toast('Delivering to HSR Layout, Bengaluru');
-  const nb=t.closest('.h-nav button'); if(nb){ document.querySelectorAll('.h-nav button').forEach(b=>b.classList.remove('on')); nb.classList.add('on'); }
+  const nb=t.closest('.efm-h-nav button'); if(nb){ document.querySelectorAll('.efm-h-nav button').forEach(b=>b.classList.remove('efm-on')); nb.classList.add('efm-on'); }
 });
 addEventListener('keydown', e=>{
   if(e.key==='/' && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)
-     && !$('#searchPage').classList.contains('on')){ e.preventDefault(); return openSearch(''); }
+     && !$('#searchPage').classList.contains('efm-on')){ e.preventDefault(); return openSearch(''); }
   if(e.key!=='Escape') return;
-  if($('#sheet').classList.contains('on')) return closeSheet();
-  if($('#cart').classList.contains('on')) return closeCart();
-  if($('#searchPage').classList.contains('on')) return closeSearch(); });
+  if($('#sheet').classList.contains('efm-on')) return closeSheet();
+  if($('#cart').classList.contains('efm-on')) return closeCart();
+  if($('#searchPage').classList.contains('efm-on')) return closeSearch(); });
 
 /* ========== theme + placeholder rotation ========== */
 $('#theme').onclick = ()=>{ document.documentElement.dataset.theme = document.documentElement.dataset.theme==='dark'?'light':'dark'; };
