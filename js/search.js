@@ -40,6 +40,13 @@ export function openSearch(prefill){
   $('#spClear').classList.toggle('efm-hide', !prefill);
   setTimeout(()=>$('#spQ').focus(), 60);
 }
+export function openOffers(){
+  SP.sel = -1; SP.mode = 'results'; SP.q = ''; SP.sort = 'rel'; SP.filters = new Set(['offer']); SP.hits = S.slice();
+  $('#searchPage').classList.add('efm-on');
+  document.body.style.overflow = 'hidden';
+  $('#spQ').value = ''; $('#spClear').classList.add('efm-hide');
+  renderSP();
+}
 export function closeSearch(){
   $('#searchPage').classList.remove('efm-on');
   if(!$('#cart').classList.contains('efm-on') && !$('#sheet').classList.contains('efm-on')) document.body.style.overflow='';
@@ -113,7 +120,7 @@ function renderSP(){
   document.querySelectorAll('#spFilters .efm-fchip').forEach(c=>c.classList.toggle('efm-on', SP.filters.has(c.dataset.f)));
   $('#spSort').value = SP.sort;
   box.innerHTML = list.length
-    ? `<div class="efm-res-meta"><b>${list.length} service${list.length!==1?'s':''}</b> for “${esc(SP.q)}”</div>
+    ? `<div class="efm-res-meta"><b>${list.length} service${list.length!==1?'s':''}</b>${SP.q ? ` for “${esc(SP.q)}”` : SP.filters.has('offer') ? ' with big discounts' : ''}</div>
        <div class="efm-grid">${list.map(s=>cardHTML(s[0])).join('')}</div>`
     : `<div class="efm-empty"><svg class="efm-ic"><use href="#search"/></svg>
         <b>No service matches those filters</b>

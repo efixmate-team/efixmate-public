@@ -374,5 +374,5 @@ footer.efm-ftr{
   .efm-sheet.efm-on{transform:translateY(0)}
   footer.efm-ftr{padding-bottom:120px}
 }
-@media (min-width:901px){ .efm-h-search{display:none} }
+@media (min-width:901px){ .efm-h-search{display:none} .efm-bar{display:none !important} }
 @media (prefers-reduced-motion:reduce){ *{transition-duration:.01ms !important} }
