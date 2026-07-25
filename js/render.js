@@ -77,7 +77,7 @@ export function renderHome(){
     <div style="${img?'':`background:${P[c]}`}">${img ? `<img src="${img}" alt="${n}" loading="lazy">` : `<svg class="efm-ic" style="color:${C[c]}"><use href="#${i}"/></svg>`}</div><b>${n}</b></button>`).join('');
   $('#banners').innerHTML = BANNERS.map(([t,s,tag,bg])=>`<div class="efm-ban" style="background:${bg}"><b>${t}</b><span>${s}</span><em>${tag}</em></div>`).join('');
   filterHome('All');
-  $('#seoLinks').innerHTML = (()=>{const cities=['Bengaluru','Mumbai','Delhi NCR','Hyderabad','Pune','Chennai'];
+  $('#seoLinks').innerHTML = (()=>{const cities=['Raipur','Bhilai','Durg', 'Bilaspur'];
     const svc=['AC service','Electrician','Plumber','Deep cleaning','Carpenter','Pest control','Salon at home','RO service'];
     return svc.flatMap(s=>cities.map(c=>`<a href="#">${s} in ${c}</a>`)).join(' · ');})();
 }
