@@ -3,6 +3,7 @@ import { openSheet, closeSheet } from './sheet.js';
 import { bump, bumpById, getLine, openCart, closeCart, confirmBooking, resetCart, selectDate, selectSlot } from './cart.js';
 import { openSearch, closeSearch } from './search.js';
 import { filterHome, filterByCategory } from './render.js';
+import { closeLogin, isLoginOpen } from './auth.js';
 
 document.addEventListener('click', e=>{
   const t = e.target;
@@ -25,7 +26,7 @@ document.addEventListener('click', e=>{
 
   if(t.closest('#openCart')||t.closest('#cartBar')) return openCart();
   if(t.closest('#closeCart')) return closeCart();
-  if(t.closest('#scrim')){ if($('#sheet').classList.contains('efm-on')) return closeSheet(); return closeCart(); }
+  if(t.closest('#scrim')){ if($('#sheet').classList.contains('efm-on')) return closeSheet(); if(isLoginOpen()) return closeLogin(); return closeCart(); }
   if(t.closest('#confirm')) return confirmBooking();
   if(t.closest('#doneBtn')) return resetCart();
   if(t.closest('#shopBtn')) return closeCart();
@@ -43,6 +44,7 @@ addEventListener('keydown', e=>{
      && !$('#searchPage').classList.contains('efm-on')){ e.preventDefault(); return openSearch(''); }
   if(e.key!=='Escape') return;
   if($('#sheet').classList.contains('efm-on')) return closeSheet();
+  if(isLoginOpen()) return closeLogin();
   if($('#cart').classList.contains('efm-on')) return closeCart();
   if($('#searchPage').classList.contains('efm-on')) return closeSearch(); });
 
