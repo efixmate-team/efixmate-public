@@ -33,7 +33,8 @@ export function syncCards() {
       : `${typeOf(l.id, l.t)[1]} · ${unitOf(l.id, l.u)[1]}`;
   });
   const n = count(), t = subtotal();
-  $('#cartLabel').innerHTML = n ? `${n} item${n > 1 ? 's' : ''} <small>${rupee(t)}</small>` : 'My Cart';
+  $('#cartLabel').textContent = n;
+  $('#cartLabel').classList.toggle('efm-hide', n === 0);
   $('#cartBar').classList.toggle('efm-on', n > 0 && !$('#cart').classList.contains('efm-on'));
   $('#barLeft').innerHTML = `${n} item${n > 1 ? 's' : ''} · ${units()} unit${units() > 1 ? 's' : ''}<small>${rupee(t)} + taxes</small>`;
 }
