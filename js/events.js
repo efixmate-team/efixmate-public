@@ -38,6 +38,9 @@ document.addEventListener('click', e=>{
     filterHome(nb.dataset.nav);
     return;
   }
+
+  const faqQ = t.closest('[data-faq-toggle]');
+  if(faqQ){ faqQ.closest('.efm-faq-item').classList.toggle('efm-on'); return; }
 });
 addEventListener('keydown', e=>{
   if(e.key==='/' && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)

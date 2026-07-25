@@ -45,33 +45,33 @@ FAM.elec.units[1] = ['fan','Fan','unit',1.1,1];
 
 /* id, name, meta, basePrice, mrp, eta, rating, icon, colour, family, tags, image (optional) */
 export const S = [
-  ['ac1','AC service & repair','Split, window or cassette',599,899,'60 MINS','4.9','snow','blue','ac','ac aircon air conditioner cooling gas split window technician','assets/services/ac1.webp'],
-  ['el1','Electrical work','Boards, fans, points, MCB',199,349,'45 MINS','4.9','zap','amber','elec','electrical electrician wiring switch board fan light mcb inverter socket short circuit','assets/services/el1.webp'],
-  ['pl1','Plumbing work','Taps, basins, drains, tanks',199,349,'45 MINS','4.8','drop','sky','plumb','plumbing plumber leak tap water drain pipe basin flush blockage seepage','assets/services/pl1.webp'],
-  ['cl1','Room & bathroom cleaning','Per room or bathroom',449,699,'90 MINS','4.8','spray','green','clean','cleaning cleaner bathroom kitchen room mopping housekeeping maid toilet','assets/services/cl1.webp'],
-  ['cl3','Full home cleaning','Whole flat, crew of 4',2499,3999,'5 HRS','4.9','spark','teal','home','cleaning deep clean home flat house housekeeping shifting','assets/services/cl3.webp'],
-  ['cl4','Sofa & mattress cleaning','Foam extraction',899,1299,'2 HRS','4.8','spark','teal','uphol','sofa mattress carpet upholstery shampoo cleaning couch','assets/services/cl4.webp'],
-  ['ap1','Appliance repair','Washer, fridge, geyser, oven',349,549,'75 MINS','4.7','machine','blue','appl','appliance repair washing machine fridge refrigerator geyser microwave oven chimney','assets/services/ap1.webp'],
-  ['ap3','RO & water purifier','Filter, TDS, installation',349,499,'60 MINS','4.8','filter','sky','ro','ro water purifier aquaguard filter tds','assets/services/ap3.webp'],
-  ['ho1','Carpentry','Doors, wardrobes, furniture',249,399,'60 MINS','4.8','hammer','violet','carp','carpenter carpentry furniture wood door wardrobe hinge lock drawer','assets/services/ho1.webp'],
-  ['ho2','CCTV & security','Cameras, DVR, wiring',999,1499,'3 HRS','4.7','cam','violet','cctv','cctv camera security dvr surveillance','assets/services/ho2.webp'],
-  ['ho3','Water tank cleaning','Drain, scrub, sanitise',799,1199,'2 HRS','4.8','tank','teal','tank','water tank cleaning sump overhead','assets/services/ho3.webp'],
-  ['ho4','Pest control','Child and pet safe',1299,1999,'2.5 HRS','4.7','bug','green','pest','pest control cockroach termite ant bedbug mosquito rodent','assets/services/ho4.webp'],
+  ['ac1','AC service & repair','Split, window or cassette',599,899,'60 MINS','4.9','snow','blue','ac','ac aircon air conditioner cooling gas split window technician','/assets/services/ac1.webp'],
+  ['el1','Electrical work','Boards, fans, points, MCB',199,349,'45 MINS','4.9','zap','amber','elec','electrical electrician wiring switch board fan light mcb inverter socket short circuit','/assets/services/el1.webp'],
+  ['pl1','Plumbing work','Taps, basins, drains, tanks',199,349,'45 MINS','4.8','drop','sky','plumb','plumbing plumber leak tap water drain pipe basin flush blockage seepage','/assets/services/pl1.webp'],
+  ['cl1','Room & bathroom cleaning','Per room or bathroom',449,699,'90 MINS','4.8','spray','green','clean','cleaning cleaner bathroom kitchen room mopping housekeeping maid toilet','/assets/services/cl1.webp'],
+  ['cl3','Full home cleaning','Whole flat, crew of 4',2499,3999,'5 HRS','4.9','spark','teal','home','cleaning deep clean home flat house housekeeping shifting','/assets/services/cl3.webp'],
+  ['cl4','Sofa & mattress cleaning','Foam extraction',899,1299,'2 HRS','4.8','spark','teal','uphol','sofa mattress carpet upholstery shampoo cleaning couch','/assets/services/cl4.webp'],
+  ['ap1','Appliance repair','Washer, fridge, geyser, oven',349,549,'75 MINS','4.7','machine','blue','appl','appliance repair washing machine fridge refrigerator geyser microwave oven chimney','/assets/services/ap1.webp'],
+  ['ap3','RO & water purifier','Filter, TDS, installation',349,499,'60 MINS','4.8','filter','sky','ro','ro water purifier aquaguard filter tds','/assets/services/ap3.webp'],
+  ['ho1','Carpentry','Doors, wardrobes, furniture',249,399,'60 MINS','4.8','hammer','violet','carp','carpenter carpentry furniture wood door wardrobe hinge lock drawer','/assets/services/ho1.webp'],
+  ['ho2','CCTV & security','Cameras, DVR, wiring',999,1499,'3 HRS','4.7','cam','violet','cctv','cctv camera security dvr surveillance','/assets/services/ho2.webp'],
+  ['ho3','Water tank cleaning','Drain, scrub, sanitise',799,1199,'2 HRS','4.8','tank','teal','tank','water tank cleaning sump overhead','/assets/services/ho3.webp'],
+  ['ho4','Pest control','Child and pet safe',1299,1999,'2.5 HRS','4.7','bug','green','pest','pest control cockroach termite ant bedbug mosquito rodent','/assets/services/ho4.webp'],
   ['sa1','Salon at home — women','Sealed, single-use kits',699,1099,'2 HRS','4.9','scissors','plum','salon','salon beauty women waxing threading pedicure manicure'],
   ['sa2','Facial & clean-up','Dermat-approved products',799,1199,'75 MINS','4.9','flower','rose','salon','facial cleanup beauty skin glow'],
   ['sa3','Men’s grooming','Haircut, beard, massage',399,599,'60 MINS','4.8','scissors','plum','salon','salon grooming men haircut beard shave massage barber'],
-  ['ot1','Painting','Interior, exterior, texture',12,18,'BOOK','4.7','brush','rose','paint','painting painter wall paint whitewash putty texture','assets/services/ot1.webp'],
+  ['ot1','Painting','Interior, exterior, texture',12,18,'BOOK','4.7','brush','rose','paint','painting painter wall paint whitewash putty texture','/assets/services/ot1.webp'],
   ['ot2','Laundry','Pickup and delivery',99,149,'30 MINS','4.7','shirt','amber','laundry','laundry dhobi wash iron ironing dry clean clothes'],
   ['ot3','House shifting','Packing, loading, transport',2999,4499,'BOOK','4.6','truck','sand','move','movers packers shifting relocation house move transport'],
 ];
 export const byId = Object.fromEntries(S.map(s=>[s[0],s]));
 
-export const CATS=[['Electrical','zap','amber','el1','assets/categories/electrical.webp'],['Plumbing','drop','sky','pl1','assets/categories/plumbing.webp'],
-  ['AC repair','snow','blue','ac1','assets/categories/ac-repair.webp'],['Cleaning','spark','teal','cl1','assets/categories/cleaning.webp'],
-  ['Painting','brush','rose','ot1','assets/categories/painting.webp'],['Carpentry','hammer','violet','ho1','assets/categories/carpentry.webp'],
-  ['Appliances','machine','blue','ap1','assets/categories/appliances.webp'],['Pest control','bug','green','ho4','assets/categories/pest-control.webp'],
-  ['RO service','filter','sky','ap3','assets/categories/ro-service.webp'],['CCTV','cam','violet','ho2','assets/categories/cctv.webp'],
-  ['Water tank','tank','teal','ho3','assets/categories/water-tank.webp'],['Deep clean','spray','green','cl3','assets/categories/deep-clean.webp'],
+export const CATS=[['Electrical','zap','amber','el1','/assets/categories/electrical.webp'],['Plumbing','drop','sky','pl1','/assets/categories/plumbing.webp'],
+  ['AC repair','snow','blue','ac1','/assets/categories/ac-repair.webp'],['Cleaning','spark','teal','cl1','/assets/categories/cleaning.webp'],
+  ['Painting','brush','rose','ot1','/assets/categories/painting.webp'],['Carpentry','hammer','violet','ho1','/assets/categories/carpentry.webp'],
+  ['Appliances','machine','blue','ap1','/assets/categories/appliances.webp'],['Pest control','bug','green','ho4','/assets/categories/pest-control.webp'],
+  ['RO service','filter','sky','ap3','/assets/categories/ro-service.webp'],['CCTV','cam','violet','ho2','/assets/categories/cctv.webp'],
+  ['Water tank','tank','teal','ho3','/assets/categories/water-tank.webp'],['Deep clean','spray','green','cl3','/assets/categories/deep-clean.webp'],
   ['Salon','scissors','plum','sa1'],['Beauty','flower','rose','sa2'],['Laundry','shirt','amber','ot2'],['Movers','truck','sand','ot3']];
 
 export const RAILS=[
