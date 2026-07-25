@@ -1,5 +1,6 @@
-import { P, C, byId, CATS, RAILS, BANNERS, rupee, minPrice, off } from './data.js';
+import { P, C, byId, S, CATS, RAILS, BANNERS, rupee, minPrice, off } from './data.js';
 import { $ } from './utils.js';
+import { syncCards } from './cart.js';
 
 export function cardHTML(id){
   const [i,n,m,base,mrp,eta,r,ic,c] = byId[id];
@@ -27,33 +28,38 @@ export function cardHTML(id){
   </article>`;
 }
 
-const slugify = t => t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+/* nav strip: each tab (other than All) filters the rails/cards below to a fixed, curated set of service ids */
+const NAV = ['All','Repairs','Cleaning','Appliances','Salon','Packages','Offers'];
+const NAV_IDS = {
+  Repairs: ['el1','pl1','ho1','ap1','ho2'],
+  Cleaning: ['cl1','cl3','cl4','ho3','ho4'],
+  Appliances: ['ap1'],
+  Salon: ['sa1','sa2','sa3'],
+  Packages: ['ot1','ot3','ot2','cl3'],
+};
 
-/* nav strip: each tab either runs a verified search term, jumps to a home rail, or opens the offers view */
-export const NAV = [
-  ['All',        {type:'home'}],
-  ['Repairs',    {type:'search', term:'repair'}],
-  ['Cleaning',   {type:'search', term:'cleaning'}],
-  ['Appliances', {type:'search', term:'appliance'}],
-  ['Salon',      {type:'search', term:'salon'}],
-  ['Packages',   {type:'scroll', anchor:'rail-bigger-jobs'}],
-  ['Offers',     {type:'offers'}],
-];
-
-export function renderHome(){
-  $('#navStrip').innerHTML = NAV.map(([n,a],i)=>{
-    const attr = a.type==='search' ? `data-nav-search="${a.term}"`
-      : a.type==='scroll' ? `data-nav-scroll="${a.anchor}"`
-      : a.type==='offers' ? `data-nav-offers="1"` : `data-nav-home="1"`;
-    return `<button class="${i?'':'efm-on'}" ${attr}>${n}</button>`;
-  }).join('');
-  $('#tiles').innerHTML = CATS.map(([n,i,c])=>`<button class="efm-tile" data-cat="${n}">
-    <div style="background:${P[c]}"><svg class="efm-ic" style="color:${C[c]}"><use href="#${i}"/></svg></div><b>${n}</b></button>`).join('');
-  $('#banners').innerHTML = BANNERS.map(([t,s,tag,bg])=>`<div class="efm-ban" style="background:${bg}"><b>${t}</b><span>${s}</span><em>${tag}</em></div>`).join('');
-  $('#rails').innerHTML = RAILS.map(([t,s,ids])=>`<section class="efm-sec" id="rail-${slugify(t.split('—')[0].trim())}">
+function defaultRailsHTML(){
+  return RAILS.map(([t,s,ids])=>`<section class="efm-sec">
     <div class="efm-sec-head"><div><h2>${t}</h2><p>${s}</p></div>
     <button class="efm-see" data-see="${t.split('—')[0].trim()}">see all <svg class="efm-ic" style="width:11px;height:11px;vertical-align:-1px"><use href="#chev-r"/></svg></button></div>
     <div class="efm-rail">${ids.map(cardHTML).join('')}</div></section>`).join('');
+}
+
+export function filterHome(label){
+  if(!label || label==='All'){ $('#rails').innerHTML = defaultRailsHTML(); syncCards(); return; }
+  const ids = label==='Offers' ? S.filter(s=>off(s[3],s[4])>=35).map(s=>s[0]) : (NAV_IDS[label]||[]);
+  $('#rails').innerHTML = `<section class="efm-sec">
+    <div class="efm-sec-head"><div><h2>${label}</h2><p>${ids.length} service${ids.length!==1?'s':''}</p></div></div>
+    <div class="efm-grid">${ids.map(cardHTML).join('')}</div></section>`;
+  syncCards();
+}
+
+export function renderHome(){
+  $('#navStrip').innerHTML = NAV.map((n,i)=>`<button class="${i?'':'efm-on'}" data-nav="${n}">${n}</button>`).join('');
+  $('#tiles').innerHTML = CATS.map(([n,i,c])=>`<button class="efm-tile" data-cat="${n}">
+    <div style="background:${P[c]}"><svg class="efm-ic" style="color:${C[c]}"><use href="#${i}"/></svg></div><b>${n}</b></button>`).join('');
+  $('#banners').innerHTML = BANNERS.map(([t,s,tag,bg])=>`<div class="efm-ban" style="background:${bg}"><b>${t}</b><span>${s}</span><em>${tag}</em></div>`).join('');
+  filterHome('All');
   $('#seoLinks').innerHTML = (()=>{const cities=['Bengaluru','Mumbai','Delhi NCR','Hyderabad','Pune','Chennai'];
     const svc=['AC service','Electrician','Plumber','Deep cleaning','Carpenter','Pest control','Salon at home','RO service'];
     return svc.flatMap(s=>cities.map(c=>`<a href="#">${s} in ${c}</a>`)).join(' · ');})();

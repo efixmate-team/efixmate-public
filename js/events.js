@@ -2,6 +2,7 @@ import { $, toast } from './utils.js';
 import { openSheet, closeSheet } from './sheet.js';
 import { bump, bumpById, getLine, openCart, closeCart, confirmBooking, resetCart, selectDate, selectSlot } from './cart.js';
 import { openSearch, closeSearch } from './search.js';
+import { filterHome } from './render.js';
 
 document.addEventListener('click', e=>{
   const t = e.target;
@@ -29,7 +30,13 @@ document.addEventListener('click', e=>{
   if(t.closest('#doneBtn')) return resetCart();
   if(t.closest('#shopBtn')) return closeCart();
   if(t.closest('#etaBox')) return toast('Delivering to HSR Layout, Bengaluru');
-  const nb=t.closest('.efm-h-nav button'); if(nb){ document.querySelectorAll('.efm-h-nav button').forEach(b=>b.classList.remove('efm-on')); nb.classList.add('efm-on'); }
+  const nb=t.closest('.efm-h-nav button');
+  if(nb){
+    document.querySelectorAll('.efm-h-nav button').forEach(b=>b.classList.remove('efm-on'));
+    nb.classList.add('efm-on');
+    filterHome(nb.dataset.nav);
+    return;
+  }
 });
 addEventListener('keydown', e=>{
   if(e.key==='/' && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)
