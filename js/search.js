@@ -79,8 +79,8 @@ function renderSP(){
 
       <div class="efm-sp-sec"><h4>Browse by category</h4>
         <div class="efm-tiles" style="grid-template-rows:1fr; padding-bottom:4px">
-          ${CATS.map(([n,i,c])=>`<button class="efm-tile" data-run="${esc(n)}">
-            <div style="background:${P[c]}"><svg class="efm-ic" style="color:${C[c]}"><use href="#${i}"/></svg></div><b>${n}</b>
+          ${CATS.map(([n,i,c,,img])=>`<button class="efm-tile" data-run="${esc(n)}">
+            <div style="${img?'':`background:${P[c]}`}">${img ? `<img src="${img}" alt="${esc(n)}" loading="lazy">` : `<svg class="efm-ic" style="color:${C[c]}"><use href="#${i}"/></svg>`}</div><b>${n}</b>
           </button>`).join('')}</div></div>
 
       <div class="efm-sp-sec"><h4>Popular right now</h4>

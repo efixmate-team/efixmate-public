@@ -3,12 +3,14 @@ import { $ } from './utils.js';
 import { syncCards } from './cart.js';
 
 export function cardHTML(id){
-  const [i,n,m,base,mrp,eta,r,ic,c] = byId[id];
+  const s = byId[id];
+  const [i,n,m,base,mrp,eta,r,ic,c] = s;
+  const img = s[11];
   const from = minPrice(id);
   return `<article class="efm-card" data-card="${i}">
-    <div class="efm-thumb" style="background:${P[c]}">
+    <div class="efm-thumb" style="${img?'':`background:${P[c]}`}">
       <span class="efm-badge-eta">${eta}</span><span class="efm-badge-off">${off(base,mrp)}% OFF</span>
-      <svg class="efm-ic" style="color:${C[c]}"><use href="#${ic}"/></svg>
+      ${img ? `<img class="efm-thumb-img" src="${img}" alt="${n}" loading="lazy">` : `<svg class="efm-ic" style="color:${C[c]}"><use href="#${ic}"/></svg>`}
     </div>
     <h3>${n}</h3>
     <div class="efm-meta">${m}</div>
@@ -71,8 +73,8 @@ export function filterByCategory(label){
 
 export function renderHome(){
   $('#navStrip').innerHTML = NAV.map((n,i)=>`<button class="${i?'':'efm-on'}" data-nav="${n}">${n}</button>`).join('');
-  $('#tiles').innerHTML = CATS.map(([n,i,c])=>`<button class="efm-tile" data-cat="${n}">
-    <div style="background:${P[c]}"><svg class="efm-ic" style="color:${C[c]}"><use href="#${i}"/></svg></div><b>${n}</b></button>`).join('');
+  $('#tiles').innerHTML = CATS.map(([n,i,c,,img])=>`<button class="efm-tile" data-cat="${n}">
+    <div style="${img?'':`background:${P[c]}`}">${img ? `<img src="${img}" alt="${n}" loading="lazy">` : `<svg class="efm-ic" style="color:${C[c]}"><use href="#${i}"/></svg>`}</div><b>${n}</b></button>`).join('');
   $('#banners').innerHTML = BANNERS.map(([t,s,tag,bg])=>`<div class="efm-ban" style="background:${bg}"><b>${t}</b><span>${s}</span><em>${tag}</em></div>`).join('');
   filterHome('All');
   $('#seoLinks').innerHTML = (()=>{const cities=['Bengaluru','Mumbai','Delhi NCR','Hyderabad','Pune','Chennai'];
