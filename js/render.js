@@ -78,6 +78,6 @@ export function renderHome(){
   $('#banners').innerHTML = BANNERS.map(([t,s,tag,bg])=>`<div class="efm-ban" style="background:${bg}"><b>${t}</b><span>${s}</span><em>${tag}</em></div>`).join('');
   filterHome('All');
   $('#seoLinks').innerHTML = (()=>{const cities=['Raipur','Bhilai','Durg', 'Bilaspur'];
-    const svc=['AC service','Electrician','Plumber','Deep cleaning','Carpenter','Pest control','Salon at home','RO service'];
+    const svc=['AC service','Electrician','Plumber','Deep cleaning','Carpenter','Pest control','RO service'];
     return svc.flatMap(s=>cities.map(c=>`<a href="#">${s} in ${c}</a>`)).join(' · ');})();
 }
