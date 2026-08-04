@@ -7,11 +7,14 @@ let sh = {id:null, t:null, u:null, q:1, editKey:null};
 
 export function openSheet(id, editKey){
   const [i,n,m,base,mrp,eta,r,ic,c] = byId[id];
+  const img = byId[id][11];
   sh = {id, t:null, u:null, q:1, editKey:editKey||null};
   const editLine = editKey ? getLine(editKey) : null;
   if(editLine){ sh.t=editLine.t; sh.u=editLine.u; sh.q=editLine.q; }
-  $('#shThumb').style.background = P[c];
-  $('#shThumb').innerHTML = `<svg class="efm-ic" style="color:${C[c]}"><use href="#${ic}"/></svg>`;
+  $('#shThumb').style.background = img ? '' : P[c];
+  $('#shThumb').innerHTML = img
+    ? `<img class="efm-thumb-img" src="${img}" alt="${n}">`
+    : `<svg class="efm-ic" style="color:${C[c]}"><use href="#${ic}"/></svg>`;
   $('#shName').textContent = n;
   $('#shMeta').textContent = `${m} · ${eta.toLowerCase()} · ★ ${r}`;
   const f = fam(id);
