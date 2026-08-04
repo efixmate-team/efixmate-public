@@ -1,6 +1,7 @@
 import { renderHome } from './render.js';
 import { renderHero } from './hero.js';
 import { syncCards } from './cart.js';
+import { refreshLocation } from './location.js';
 import './sheet.js';
 import './search.js';
 import './auth.js';
@@ -14,4 +15,5 @@ if (document.getElementById('tiles')) {
   renderHome();
 }
 syncCards();
+refreshLocation();
 document.getElementById('ftYear').textContent = new Date().getFullYear();

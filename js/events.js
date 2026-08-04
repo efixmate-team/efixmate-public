@@ -1,9 +1,10 @@
-import { $, toast } from './utils.js';
+import { $ } from './utils.js';
 import { openSheet, closeSheet } from './sheet.js';
 import { bump, bumpById, getLine, openCart, closeCart, confirmBooking, resetCart, selectDate, selectSlot } from './cart.js';
 import { openSearch, closeSearch } from './search.js';
 import { filterHome, filterByCategory } from './render.js';
 import { closeLogin, isLoginOpen, closeLogoutConfirm, isLogoutConfirmOpen } from './auth.js';
+import { etaToast } from './location.js';
 
 document.addEventListener('click', e=>{
   const t = e.target;
@@ -30,7 +31,7 @@ document.addEventListener('click', e=>{
   if(t.closest('#confirm')) return confirmBooking();
   if(t.closest('#doneBtn')) return resetCart();
   if(t.closest('#shopBtn')) return closeCart();
-  if(t.closest('#etaBox')) return toast('Delivering to HSR Layout, Bengaluru');
+  if(t.closest('#etaBox')) return etaToast();
   const nb=t.closest('.efm-h-nav button');
   if(nb){
     document.querySelectorAll('.efm-h-nav button').forEach(b=>b.classList.remove('efm-on'));

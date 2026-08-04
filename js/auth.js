@@ -1,4 +1,5 @@
 import { $, toast } from './utils.js';
+import { refreshLocation } from './location.js';
 
 /* ========== login: phone + OTP against the real eFixMate user API ==========
    Local dev: the Express server's CORS allowlist auto-permits any localhost
@@ -86,6 +87,7 @@ async function verifyOtp(){
     localStorage.setItem(USER_KEY, JSON.stringify(user));
     closeLogin();
     paintAuthUI();
+    refreshLocation();
     toast(`Welcome${user.firstName ? ', ' + user.firstName : ''}!`);
   } catch(e){ showError(e.message); }
   finally { btn.disabled = false; }
@@ -140,6 +142,7 @@ export async function logout(){
   localStorage.removeItem(TOKEN_KEY); localStorage.removeItem(USER_KEY);
   closeUserDrop();
   paintAuthUI();
+  refreshLocation();
   toast('Logged out');
   if(token){
     try { await fetch(`${API_BASE}/user/logout`, { method:'POST', headers:{ Authorization:`Bearer ${token}` } }); } catch {}
